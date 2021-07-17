@@ -8,7 +8,7 @@ require('dotenv').config()
 const port = process.env.PORT || 5000;
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { userNewUrlParser: true, useCreatIndex: true });
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;
 connection.once('open', ()=>{
@@ -20,9 +20,11 @@ app.use(express.json());
 
 const departmentRouter = require('./routes/departmentRoute');
 const moduleRouter = require('./routes/moduleRoute');
+const reviewRouter = require('./routes/reviewRoute');
 
 app.use('/departments', departmentRouter);
 app.use('/modules', moduleRouter);
+app.use('/reviews', reviewRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

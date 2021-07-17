@@ -34,6 +34,12 @@ router.route('/:id').get((req,res) => {
         .catch(err => res.status(400).json('Error: ' +err));
 })
 
+router.route('/mod/:id').get((req,res) => {
+    Module.findById(req.params.id)
+        .then(modules => res.json(modules))
+        .catch(err => res.status(400).json('Error: ' +err));
+})
+
 router.route('/:id').delete((req,res) => {
     Exercise.findByIdAndDelete(req.params.id)
         .then(() => res.json('Deleted'))
